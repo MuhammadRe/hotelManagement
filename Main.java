@@ -471,6 +471,28 @@ class Hotel
              System.out.println("Cannot be done");
          }
     }
+    static void displayBookedRooms()
+    {
+        System.out.println("\nDisplaying booked rooms with customer details:\n");
+        displayBookedRoomDetails(hotel_ob.luxury_doublerrom, "Luxury Double Room");
+        displayBookedRoomDetails(hotel_ob.deluxe_doublerrom, "Deluxe Double Room");
+        displayBookedRoomDetails(hotel_ob.luxury_singleerrom, "Luxury Single Room");
+        displayBookedRoomDetails(hotel_ob.deluxe_singleerrom, "Deluxe Single Room");
+    }
+     static void displayBookedRoomDetails(Singleroom[] rooms, String roomType)
+    {
+        for (int i = 0; i < rooms.length; i++) {
+            if (rooms[i] != null) {
+                System.out.println("Room Type: " + roomType + ", Room Number: " + (i + 1));
+                System.out.println("Name: " + rooms[i].name + ", Contact: " + rooms[i].contact + ", Gender: " + rooms[i].gender);
+                if (rooms[i] instanceof Doubleroom) {
+                    Doubleroom dr = (Doubleroom) rooms[i];
+                    System.out.println("Second Customer - Name: " + dr.name2 + ", Contact: " + dr.contact2 + ", Gender: " + dr.gender2);
+                }
+                System.out.println();
+            }
+        }
+    }
 }
 
 
@@ -562,7 +584,10 @@ public class Main {
                      else
                          System.out.println("Room doesn't exist");
                      break;
-            case 6:break x;
+            case 6:
+                Hotel.displayBookedRooms();
+                    break;
+            case 7:break x;
                 
         }
            
