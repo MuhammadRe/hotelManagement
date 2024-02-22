@@ -493,6 +493,46 @@ class Hotel
             }
         }
     }
+    static void searchBooking(String name)
+    {
+        boolean found = false;
+        for (int i = 0; i < hotel_ob.luxury_singleerrom.length; i++)
+        {
+            Singleroom room = hotel_ob.luxury_singleerrom[i];
+            if (room != null && room.name.equals(name)) {
+                System.out.println("Booking found in Luxury Single Room, Room Number: " + (i + 1));
+                found = true;
+            }
+        }
+        for (int i = 0; i < hotel_ob.luxury_doublerrom.length; i++)
+        {
+            Doubleroom room = hotel_ob.luxury_doublerrom[i];
+            if (room != null && (room.name.equals(name) || room.name2.equals(name))) {
+                System.out.println("Booking found in Luxury Double Room, Room Number: " + (i + 1));
+                found = true;
+            }
+        }
+        for (int i = 0; i < hotel_ob.deluxe_singleerrom.length; i++)
+        {
+            Singleroom room = hotel_ob.deluxe_singleerrom[i];
+            if (room != null && room.name.equals(name)) {
+                System.out.println("Booking found in Deluxe Single Room, Room Number: " + (i + 1));
+                found = true;
+            }
+        }
+        for (int i = 0; i < hotel_ob.deluxe_doublerrom.length; i++)
+        {
+            Doubleroom room = hotel_ob.deluxe_doublerrom[i];
+            if (room != null && (room.name.equals(name) || room.name2.equals(name))) {
+                System.out.println("Booking found in Deluxe Double Room, Room Number: " + (i + 1));
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No booking found for: " + name);
+        }
+    }
 }
 
 
@@ -505,10 +545,11 @@ class write implements Runnable
     }
     @Override
     public void run() {
-          try{
-        FileOutputStream fout=new FileOutputStream("backup");
-        ObjectOutputStream oos=new ObjectOutputStream(fout);
-        oos.writeObject(hotel_ob);
+        try
+        {
+            FileOutputStream fout=new FileOutputStream("backup");
+            ObjectOutputStream oos=new ObjectOutputStream(fout);
+            oos.writeObject(hotel_ob);
         }
         catch(Exception e)
         {
@@ -536,8 +577,7 @@ public class Main {
         char wish;
         x:
         do{
-
-        System.out.println("\nEnter your choice :\n1.Display room details\n2.Display room availability \n3.Book\n4.Order food\n5.Checkout\n6.Exit\n");
+        System.out.println("\nEnter your choice :\n1.Display room details\n2.Display room availability \n3.Book\n4.Order food\n5.Checkout\n6.Display booked rooms with customer details\n7.Search booking by name\n8.Exit");
         ch = sc.nextInt();
         switch(ch){
             case 1: System.out.println("\nChoose room type :\n1.Luxury Double Room \n2.Deluxe Double Room \n3.Luxury Single Room \n4.Deluxe Single Room\n");
@@ -587,8 +627,12 @@ public class Main {
             case 6:
                 Hotel.displayBookedRooms();
                     break;
+            case 8:
+                System.out.print("Enter customer name to search: ");
+                String searchName = sc.next();
+                Hotel.searchBookingByName(searchName);
+                    break;
             case 7:break x;
-                
         }
            
             System.out.println("\nContinue : (y/n)");
