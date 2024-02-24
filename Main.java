@@ -36,8 +36,8 @@ class Singleroom implements Serializable
     String contact;
     String gender;   
     ArrayList<Food> food =new ArrayList<>();
-
-   
+    float rating;
+    
     Singleroom()
     {
         this.name="";
@@ -47,6 +47,10 @@ class Singleroom implements Serializable
         this.name=name;
         this.contact=contact;
         this.gender=gender;
+    }
+    public void setRating(float rating)
+    {
+        this.rating = rating;
     }
 }
 class Doubleroom extends Singleroom implements Serializable
@@ -434,6 +438,18 @@ class Hotel
                 System.out.println("\nEnter valid option : ");
                 break;
         }
+        System.out.println("Would you like to rate your stay? (1-5, Enter 0 to skip)");
+        float rate = sc.nextFloat();
+        if (rate > 0 && rate <= 5) {
+            // Assuming rn is the room number adjusted for 0-based indexing
+            switch (rtype) {
+                case 1: hotel_ob.luxury_doublerrom[rn].setRating(rate); break;
+                case 2: hotel_ob.deluxe_doublerrom[rn].setRating(rate); break;
+                case 3: hotel_ob.luxury_singleerrom[rn].setRating(rate); break;
+                case 4: hotel_ob.deluxe_singleerrom[rn].setRating(rate); break;
+            }
+            System.out.println("Thank you for your feedback!");
+        }
     }
     
     static void order(int rn,int rtype)
@@ -627,12 +643,12 @@ public class Main {
             case 6:
                 Hotel.displayBookedRooms();
                     break;
+            case 7:break x;
             case 8:
                 System.out.print("Enter customer name to search: ");
                 String searchName = sc.next();
                 Hotel.searchBookingByName(searchName);
                     break;
-            case 7:break x;
         }
            
             System.out.println("\nContinue : (y/n)");
