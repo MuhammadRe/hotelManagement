@@ -549,6 +549,44 @@ class Hotel
             System.out.println("No booking found for: " + name);
         }
     }
+    static void displayTotalEarnings()
+    {
+        double totalEarnings = 0;
+
+        for (Doubleroom room : hotel_ob.luxury_doublerrom) {
+            if (room != null) {
+                totalEarnings += 4000; // Assuming 4000 is the fixed charge per day for a luxury double room
+                for (Food food : room.food) {
+                    totalEarnings += food.price;
+                }
+            }
+        }
+        for (Doubleroom room : hotel_ob.deluxe_doublerrom) {
+            if (room != null) {
+                totalEarnings += 3000; // Assuming 4000 is the fixed charge per day for a luxury double room
+                for (Food food : room.food) {
+                    totalEarnings += food.price;
+                }
+            }
+        }
+        for (Singleroom room : hotel_ob.luxury_singleerrom) {
+            if (room != null) {
+                totalEarnings += 2200; // Assuming 4000 is the fixed charge per day for a luxury double room
+                for (Food food : room.food) {
+                    totalEarnings += food.price;
+                }
+            }
+        }
+        for (Singleroom room : hotel_ob.deluxe_singleerrom) {
+            if (room != null) {
+                totalEarnings += 1200; // Assuming 4000 is the fixed charge per day for a luxury double room
+                for (Food food : room.food) {
+                    totalEarnings += food.price;
+                }
+            }
+        }
+        System.out.println("Total Earnings from Bookings and Food Orders: $" + totalEarnings);
+    }
 }
 
 
@@ -593,62 +631,65 @@ public class Main {
         char wish;
         x:
         do{
-        System.out.println("\nEnter your choice :\n1.Display room details\n2.Display room availability \n3.Book\n4.Order food\n5.Checkout\n6.Display booked rooms with customer details\n7.Search booking by name\n8.Exit");
+        System.out.println("\nEnter your choice :\n1.Display room details\n2.Display room availability \n3.Book\n4.Order food\n5.Checkout\n6.Display booked rooms with customer details\n7.Search booking by name\n8.Display Total Earnings\n9.Exit");
         ch = sc.nextInt();
         switch(ch){
             case 1: System.out.println("\nChoose room type :\n1.Luxury Double Room \n2.Deluxe Double Room \n3.Luxury Single Room \n4.Deluxe Single Room\n");
-                    ch2 = sc.nextInt();
-                    Hotel.features(ch2);
+                ch2 = sc.nextInt();
+                Hotel.features(ch2);
                 break;
             case 2:System.out.println("\nChoose room type :\n1.Luxury Double Room \n2.Deluxe Double Room \n3.Luxury Single Room\n4.Deluxe Single Room\n");
-                     ch2 = sc.nextInt();
-                     Hotel.availability(ch2);
+                 ch2 = sc.nextInt();
+                 Hotel.availability(ch2);
                 break;
             case 3:System.out.println("\nChoose room type :\n1.Luxury Double Room \n2.Deluxe Double Room \n3.Luxury Single Room\n4.Deluxe Single Room\n");
-                     ch2 = sc.nextInt();
-                     Hotel.bookroom(ch2);                     
+                 ch2 = sc.nextInt();
+                 Hotel.bookroom(ch2);                     
                 break;
             case 4:
                  System.out.print("Room Number -");
-                     ch2 = sc.nextInt();
-                     if(ch2>60)
-                         System.out.println("Room doesn't exist");
-                     else if(ch2>40)
-                         Hotel.order(ch2-41,4);
-                     else if(ch2>30)
-                         Hotel.order(ch2-31,3);
-                     else if(ch2>10)
-                         Hotel.order(ch2-11,2);
-                     else if(ch2>0)
-                         Hotel.order(ch2-1,1);
-                     else
-                         System.out.println("Room doesn't exist");
-                     break;
+                 ch2 = sc.nextInt();
+                 if(ch2>60)
+                     System.out.println("Room doesn't exist");
+                 else if(ch2>40)
+                     Hotel.order(ch2-41,4);
+                 else if(ch2>30)
+                     Hotel.order(ch2-31,3);
+                 else if(ch2>10)
+                     Hotel.order(ch2-11,2);
+                 else if(ch2>0)
+                     Hotel.order(ch2-1,1);
+                 else
+                     System.out.println("Room doesn't exist");
+                 break;
             case 5:                 
                 System.out.print("Room Number -");
-                     ch2 = sc.nextInt();
-                     if(ch2>60)
-                         System.out.println("Room doesn't exist");
-                     else if(ch2>40)
-                         Hotel.deallocate(ch2-41,4);
-                     else if(ch2>30)
-                         Hotel.deallocate(ch2-31,3);
-                     else if(ch2>10)
-                         Hotel.deallocate(ch2-11,2);
-                     else if(ch2>0)
-                         Hotel.deallocate(ch2-1,1);
-                     else
-                         System.out.println("Room doesn't exist");
-                     break;
+                 ch2 = sc.nextInt();
+                 if(ch2>60)
+                     System.out.println("Room doesn't exist");
+                 else if(ch2>40)
+                     Hotel.deallocate(ch2-41,4);
+                 else if(ch2>30)
+                     Hotel.deallocate(ch2-31,3);
+                 else if(ch2>10)
+                     Hotel.deallocate(ch2-11,2);
+                 else if(ch2>0)
+                     Hotel.deallocate(ch2-1,1);
+                 else
+                     System.out.println("Room doesn't exist");
+                 break;
             case 6:
                 Hotel.displayBookedRooms();
-                    break;
-            case 7:break x;
-            case 8:
+                break;
+            case 7:
                 System.out.print("Enter customer name to search: ");
                 String searchName = sc.next();
                 Hotel.searchBookingByName(searchName);
-                    break;
+                break;
+            case 9:
+                Hotel.displayTotalEarnings();
+                break;
+            case 8:break x;
         }
            
             System.out.println("\nContinue : (y/n)");
